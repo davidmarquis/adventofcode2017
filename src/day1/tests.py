@@ -5,7 +5,7 @@ puzzle_input = '5162992814911695127194252761945964242912687126971558636518469379
 
 def captcha(input, offset):
     offset_input = input[offset:] + input[0:offset]
-    pairs = zip(iter(input), iter(offset_input))
+    pairs = zip(input, offset_input)
     return sum([int(a) for a, b in pairs if a == b])
 
 
