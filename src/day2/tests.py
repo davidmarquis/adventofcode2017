@@ -20,16 +20,24 @@ puzzle = """
 """
 
 
-def split_line(line):
-    return [int(val) for val in line.strip().split()]
+def checksum_part1(spreadsheet):
+    return sum([max(row) - min(row) for row in read_cells(spreadsheet)])
+
+
+def checksum_part2(spreadsheet):
+    return sum([int(a / b) for a, b in divisible_pairs(read_cells(spreadsheet))])
 
 
 def read_cells(spreadsheet):
     return [split_line(line) for line in spreadsheet.splitlines() if line.strip() != '']
 
 
-def checksum_part1(spreadsheet):
-    return sum([max(row) - min(row) for row in read_cells(spreadsheet)])
+def split_line(line):
+    return [int(val) for val in line.strip().split()]
+
+
+def divisible_pairs(rows):
+    return [next(pair for pair in pairs(row) if is_divisible(*pair)) for row in rows]
 
 
 def pairs(row):
@@ -40,14 +48,6 @@ def pairs(row):
 
 def is_divisible(a, b):
     return a % b == 0
-
-
-def divisible_pairs(rows):
-    return [next(pair for pair in pairs(row) if is_divisible(*pair)) for row in rows]
-
-
-def checksum_part2(spreadsheet):
-    return sum([int(a / b) for a, b in divisible_pairs(read_cells(spreadsheet))])
 
 
 class TestChecksum(TestCase):

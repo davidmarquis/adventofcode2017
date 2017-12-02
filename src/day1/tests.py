@@ -20,18 +20,18 @@ def captcha_part2(input):
 class TestCaptcha(TestCase):
 
     def test_captcha_part1(self):
-        self.assertEqual(captcha_part1('1122'), 3)
-        self.assertEqual(captcha_part1('1111'), 4)
-        self.assertEqual(captcha_part1('1234'), 0)
-        self.assertEqual(captcha_part1('91212129'), 9)
+        self.assertEqual(3, captcha_part1('1122'))
+        self.assertEqual(4, captcha_part1('1111'))
+        self.assertEqual(0, captcha_part1('1234'))
+        self.assertEqual(9, captcha_part1('91212129'))
 
-        print('Solution part 1 : %s' % captcha_part1(puzzle_input))
+        print('Solution part 1: %s' % captcha_part1(puzzle_input))
 
     def test_captcha_part2(self):
-        self.assertEqual(captcha_part2('1212'), 6)
-        self.assertEqual(captcha_part2('1221'), 0)
-        self.assertEqual(captcha_part2('123425'), 4)
-        self.assertEqual(captcha_part2('123123'), 12)
-        self.assertEqual(captcha_part2('12131415'), 4)
+        self.assertEqual(6, captcha_part2('1212'))
+        self.assertEqual(0, captcha_part2('1221'))
+        self.assertEqual(4, captcha_part2('123425'))
+        self.assertEqual(12, captcha_part2('123123'))
+        self.assertEqual(4, captcha_part2('12131415'))
 
-        print('Solution part 2 : %s' % captcha_part2(puzzle_input))
+        print('Solution part 2: %s' % captcha_part2(puzzle_input))
