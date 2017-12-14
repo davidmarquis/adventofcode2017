@@ -13,6 +13,12 @@ def part2_knot_hash(input):
     return reduce(lambda hexa, num: hexa + '{:02x}'.format(num), dense_hash, '')
 
 
+def knot_hash(input_str):
+    input = [ord(char) for char in input_str]
+    input += [17, 31, 73, 47, 23]
+    return part2_knot_hash(input)
+
+
 def hash_sparse(num_elements, lengths, rounds):
     elements = list(range(0, num_elements))
 
@@ -52,7 +58,4 @@ class TestKnotHash(TestCase):
         print('Solution part 1: %s' % part1(256, [183,0,31,146,254,240,223,150,2,206,161,1,255,232,199,88]))
 
     def test_part2(self):
-        input = [ord(char) for char in '183,0,31,146,254,240,223,150,2,206,161,1,255,232,199,88']
-        input += [17, 31, 73, 47, 23]
-
-        print('Solution part 2: %s' % part2_knot_hash(input))
+        print('Solution part 2: %s' % knot_hash('183,0,31,146,254,240,223,150,2,206,161,1,255,232,199,88'))
