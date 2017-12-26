@@ -1,20 +1,19 @@
 from day18.tests import Reference, Program, ProgramTerminated
 
-mul_count = 0
-
 
 class Day23InstructionSet:
-    def run(self, program, operation, left, right=None):
-        self._run(program, operation, Reference(left, program), Reference(right, program))
+    mul_count = 0
 
-    def _run(self, program, operation, left, right):
+    def run(self, program, operation, left, right=None):
+        left = Reference(left, program)
+        right = Reference(right, program)
+
         if operation == 'set':
             left.set(right.get())
         elif operation == 'sub':
             left.set(left.get() - right.get())
         elif operation == 'mul':
-            global mul_count
-            mul_count += 1
+            self.mul_count += 1
             left.set(left.get() * right.get())
         elif operation == 'jnz':
             if left.get() != 0:
@@ -25,11 +24,13 @@ class Day23InstructionSet:
 with open('instructions.txt', 'r') as fin:
     lines = fin.readlines()
 
+instructions = Day23InstructionSet()
 try:
-    program = Program(Day23InstructionSet(), lines)
+    program = Program(instructions, lines)
     program.execute()
 except ProgramTerminated:
-    print('Solution part 1: %s' % mul_count)
+    print('Solution part 1: %s' % instructions.mul_count)
+
 
 # part 2
 a = b = c = d = e = f = g = h = 0
@@ -66,7 +67,7 @@ def outer():
 
 
 for b in range(b, c, 17):
-    f, d  = 1, 2
+    f, d = 1, 2
     outer()
     while g != 0:
         outer()
@@ -79,13 +80,13 @@ for b in range(b, c, 17):
 
 print(h)
 
+
 # Part 2 - we're counting non-prime numbers between two numbers, every 17 numbers!
 h = 0
-a = 1
 start = 79 * 100 + 100000
 end = start + 17000
 
-for b in range(start, end + a, 17):
+for b in range(start, end + 1, 17):
     for d in range(2, b):
         if b % d == 0:
             h += 1
